@@ -1,5 +1,5 @@
 import { ThemedText } from '@/components/themed-text';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, } from 'react-native';
 
 export default function HomeScreen() {
   return (
@@ -18,8 +18,9 @@ const styles = StyleSheet.create({
   },
   textCenter: {
     textAlign: 'center',
-    fontSize: 34,
+    fontSize: 40,
     fontWeight: 'bold',
+    marginBottom: 600,
   },
 });
   
