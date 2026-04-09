@@ -49,9 +49,12 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: 'bold',
     marginBottom: 20,
+    textShadowColor: 'rgb(0, 0, 100)',
+    textShadowOffset: { width: 10, height: 10 },
+    textShadowRadius: 40,
   },
   label: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#FFF',
     marginBottom: 8,
@@ -75,7 +78,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#FFF',
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
   },
 });
