@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-
+app.use(express.json());
 const usuarios = [
     { id: 1, nome: "Paola Tamires", email: "Paola@email.com" },
     { id: 2, nome: "Caio Cesar", email: "Caio@email.com" }
@@ -19,9 +19,16 @@ app.get('/eventos', (req, res) => {
             nomeUsuario: usuario ? usuario.nome : "Não encontrado"
         };
     });
-
-    
-    res.json(listagem);
+ res.json(listagem);
 });
-
+app.post('/eventos', (req, res) => {
+    const novoEvento = {
+        id: eventos.length + 1,
+        usuarioid: req.body.usuarioid,
+        data: req.body.data,
+        horario: req.body.horario
+    };
+    eventos.push(novoEvento);
+    res.status(201).json(novoEvento); 
+});
 app.listen(3000, () => console.log("Servidor rodando em http://localhost:3000"));
