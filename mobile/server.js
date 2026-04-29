@@ -19,6 +19,7 @@ app.get('/eventos', (req, res) => {
             nomeUsuario: usuario ? usuario.nome : "Não encontrado"
         };
     });
+    app.get
  res.json(listagem);
 });
 app.post('/eventos', (req, res) => {
