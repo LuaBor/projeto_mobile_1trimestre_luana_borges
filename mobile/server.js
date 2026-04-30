@@ -19,8 +19,24 @@ app.get('/eventos', (req, res) => {
             nomeUsuario: usuario ? usuario.nome : "Não encontrado"
         };
     });
-    app.get
  res.json(listagem);
+});
+app.get('/eventos/:id', (req, res) => {
+    const { id } = req.params;
+    let campo = req.query.campo; 
+    if (campo) {
+        campo = campo.trim();
+    }
+    const evento = eventos.find(e => e.id === parseInt(id));
+
+    if (!evento) {
+        return res.status(404).json({ mensagem: "Evento não encontrado" });
+    }
+    if (campo && evento[campo] !== undefined) {
+        return res.json({ [campo]: evento[campo] });
+    }
+
+    res.json(evento);
 });
 app.post('/eventos', (req, res) => {
     const novoEvento = {
