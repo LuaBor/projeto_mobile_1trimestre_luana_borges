@@ -3,46 +3,60 @@ import React, { useState } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function HomeScreen() {
-  const [texto, setTexto] = useState('');
+  const [nome, setNome] = useState('');
+  const [texto, setTexto] = useState(''); 
   const router = useRouter();
-  const handleAgendamento = () => {
-    
-    const handleAgendamento = () => {
-      Alert.alert(
-        "Cadastro Concluído",
-        "Sua reserva foi realizada com sucesso!",
-        [{ text: "Entendido", onPress: () => router.push('/') }]
-      );
-    };
-  };
+ const handleAgendamento = () => {
+    if (!nome.trim()) {
+      Alert.alert("Erro", "O campo nome é obrigatório!");
+      return; 
+    }
+ Alert.alert(
+      "Cadastro Concluído",
+      "Sua reserva foi realizada com sucesso!",
+      [{ text: "Entendido", onPress: () => router.push('/') }]
+    );
+  }; 
   return (
     <ScrollView style={styles.container}>
-    <Text style={styles.label}>Nome:</Text>
-    <TextInput style={styles.input} />
+   {/* CAMPO NOME */}
+   <Text style={styles.label}>Nome:</Text>
+    <TextInput 
+      style={styles.input} 
+      placeholder="Digite seu nome"
+      value={nome}            
+      onChangeText={setNome}  
+    />
+
+    {/* Outros campos (Data, Horário, etc.) */}
     <Text style={styles.label}>Data:</Text>
-    <TextInput  style={styles.input} ></TextInput>
+    <TextInput style={styles.input} /> 
+
     <Text style={styles.label}>Horário de inicio:</Text>
     <TextInput style={styles.input} />
+
     <Text style={styles.label}>Numero de pessoas:</Text>
     <TextInput style={styles.input} />
-    
-    <View style={styles.buttonContainer}>
-        <TouchableOpacity 
-          style={styles.buttonAgendar} 
-          onPress={handleAgendamento}
-        >
-          <Text style={styles.buttonText}>Confirmar Agendamento</Text>
-        </TouchableOpacity>
 
-        <TouchableOpacity 
-          style={styles.buttonVoltar} 
-          onPress={() => router.back()} 
-        >
-          <Text style={styles.buttonVoltarText}>Voltar</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
-  );
+    <View style={styles.buttonContainer}>
+      <TouchableOpacity 
+        style={styles.buttonAgendar} 
+        onPress={handleAgendamento}
+      >
+        <Text style={styles.buttonText}>Confirmar Agendamento</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity 
+        style={styles.buttonVoltar} 
+        onPress={() => router.back()}
+      >
+        <Text style={styles.buttonVoltarText}>Voltar</Text>
+      </TouchableOpacity>
+    </View>
+
+  </ScrollView>
+);
+ 
 }
 
 const styles = StyleSheet.create({

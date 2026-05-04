@@ -8,7 +8,6 @@ export default function HomeScreen() {
   const [texto, setTexto] = useState('');
   const router = useRouter();
   
-
   return (
     <ScrollView contentContainerStyle={styles.container}>
   <ThemedText style={styles.textCenter}>Vivid Celebrations</ThemedText>
