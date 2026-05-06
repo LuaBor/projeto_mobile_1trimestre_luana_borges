@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function HomeScreen() {
-  const [nome, setNome] = useState('');
+ const [nome, setNome] = useState('');
 const [data, setData] = useState('');
 const [horario, setHorario] = useState('');
-const [pessoas, setPessoas] = useState(''); 
+const [pessoas, setPessoas] = useState('');
   const router = useRouter();
   const handleAgendamento = () => {
    
