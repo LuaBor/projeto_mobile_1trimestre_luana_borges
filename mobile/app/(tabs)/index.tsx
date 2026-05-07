@@ -1,35 +1,79 @@
 import { ThemedText } from '@/components/themed-text';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import { Alert, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 
 
 export default function HomeScreen() {
   const [texto, setTexto] = useState('');
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [confirmacao, setConfirmacao] = useState('');
   const router = useRouter();
+  const handleAgendamento = () => {
+    if (nome.trim() === '' || email.trim() === '' || senha.trim() === '' || confirmacao.trim() === '') {
+      Alert.alert(
+        "Campos Obrigatórios",
+        "Por favor, preencha todas as informações antes de continuar.",
+        [{ text: "OK" }]
+      );
+      return;
+    }
+    if (senha !== confirmacao) {
+      Alert.alert("Erro", "As senhas não coincidem.");
+      return;
+    }
+
+    Alert.alert("Sucesso", "Cadastro realizado com sucesso!");
+    router.push('/vit');
+  };
   
   return (
     <ScrollView contentContainerStyle={styles.container}>
   <ThemedText style={styles.textCenter}>Vivid Celebrations</ThemedText>
  
-   <Text style={styles.label}>Nome:</Text>
-   <TextInput style={styles.input}/>
+  <Text style={styles.label}>Nome:</Text>
+      <TextInput 
+        style={styles.input} 
+        placeholder="Digite seu nome"
+        value={nome}
+        onChangeText={setNome}
+      />
 
-   <Text style={styles.label}>E-mail:</Text>
-   <TextInput style={styles.input}/>
+      <Text style={styles.label}>E-mail:</Text>
+      <TextInput 
+        style={styles.input} 
+        placeholder="Digite seu e-mail"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+      />
 
-   <Text style={styles.label}>Senha:</Text>
-   <TextInput style={styles.input}/>
+      <Text style={styles.label}>Senha:</Text>
+      <TextInput 
+        style={styles.input} 
+        placeholder="Digite sua senha"
+        value={senha}
+        onChangeText={setSenha}
+        secureTextEntry
+      />
 
-   <Text style={styles.label}>Confirmação de senha:</Text>
-   <TextInput style={styles.input}/>
-
-   <TouchableOpacity 
-        style={styles.button} 
-        onPress={() => router.push('/vit')} 
-      >
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
+      <Text style={styles.label}>Confirmação de senha:</Text>
+      <TextInput 
+        style={styles.input} 
+        placeholder="Confirme sua senha"
+        value={confirmacao}
+        onChangeText={setConfirmacao}
+        secureTextEntry
+      />
+      <TouchableOpacity 
+  style={[styles.button, { opacity: nome && email && senha ? 1 : 0.5 }]} 
+  onPress={handleAgendamento}
+  disabled={!nome || !email || !senha}
+>
+  <Text style={styles.buttonText}>Login</Text>
+</TouchableOpacity>
 
 </ScrollView>
   );
